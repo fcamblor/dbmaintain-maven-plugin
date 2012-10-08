@@ -15,6 +15,8 @@
  */
 package org.dbmaintain.maven.plugin;
 
+import org.dbmaintain.launch.task.DbMaintainDatabase;
+
 /**
  * @author Tim Ducheyne
  * @author Filip Neven
@@ -58,7 +60,6 @@ public class Database {
      * @required
      */
     private String schemaNames;
-
 
     public Database() {
     }
@@ -137,5 +138,18 @@ public class Database {
 
     public String getSchemaNames() {
         return schemaNames;
+    }
+
+    public DbMaintainDatabase toDbMaintainDatabase() {
+        DbMaintainDatabase dbMaintainDatabase = new DbMaintainDatabase();
+        dbMaintainDatabase.setName(this.getName());
+        dbMaintainDatabase.setIncluded(this.isIncluded());
+        dbMaintainDatabase.setDialect(this.getDialect());
+        dbMaintainDatabase.setDriverClassName(this.getDriverClassName());
+        dbMaintainDatabase.setUrl(this.getUrl());
+        dbMaintainDatabase.setUserName(this.getUserName());
+        dbMaintainDatabase.setPassword(this.getPassword());
+        dbMaintainDatabase.setSchemaNames(this.getSchemaNames());
+        return dbMaintainDatabase;
     }
 }

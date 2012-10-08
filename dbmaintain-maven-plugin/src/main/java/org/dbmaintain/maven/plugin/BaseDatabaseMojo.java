@@ -40,6 +40,13 @@ public abstract class BaseDatabaseMojo extends BaseMojo {
      */
     protected List<Database> databases;
 
+    /**
+     * Database instance configuration, loaded from a property file
+     *
+     * @parameter
+     */
+    protected List<PropertyDatabase> propertyDatabases;
+
 
     protected abstract DbMaintainTask createDbMaintainTask(List<DbMaintainDatabase> dbMaintainDatabases);
 
@@ -52,20 +59,15 @@ public abstract class BaseDatabaseMojo extends BaseMojo {
 
     protected List<DbMaintainDatabase> getDbMaintainDatabases() {
         List<DbMaintainDatabase> dbMaintainDatabases = new ArrayList<DbMaintainDatabase>();
-        if (databases == null) {
-            return dbMaintainDatabases;
+        if (databases != null) {
+            for (Database database : databases) {
+                dbMaintainDatabases.add(database.toDbMaintainDatabase());
+            }
         }
-        for (Database database : databases) {
-            DbMaintainDatabase dbMaintainDatabase = new DbMaintainDatabase();
-            dbMaintainDatabase.setName(database.getName());
-            dbMaintainDatabase.setIncluded(database.isIncluded());
-            dbMaintainDatabase.setDialect(database.getDialect());
-            dbMaintainDatabase.setDriverClassName(database.getDriverClassName());
-            dbMaintainDatabase.setUrl(database.getUrl());
-            dbMaintainDatabase.setUserName(database.getUserName());
-            dbMaintainDatabase.setPassword(database.getPassword());
-            dbMaintainDatabase.setSchemaNames(database.getSchemaNames());
-            dbMaintainDatabases.add(dbMaintainDatabase);
+        if (propertyDatabases != null) {
+            for (PropertyDatabase database : propertyDatabases) {
+                dbMaintainDatabases.add(database.toDbMaintainDatabase());
+            }
         }
         return dbMaintainDatabases;
     }
