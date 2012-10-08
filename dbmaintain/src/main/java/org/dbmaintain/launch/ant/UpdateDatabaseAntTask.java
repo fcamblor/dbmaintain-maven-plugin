@@ -42,11 +42,17 @@ public class UpdateDatabaseAntTask extends BaseDatabaseAntTask {
     private Boolean useLastModificationDates;
     private String scriptFileExtensions;
     private String scriptParameterFile;
+    private String executedScriptsTableName;
 
 
     @Override
     protected DbMaintainTask createDbMaintainTask() {
-        return new UpdateDatabaseTask(getDbMaintainDatabases(), scriptLocations, scriptEncoding, postProcessingScriptDirectoryName, fromScratchEnabled, autoCreateDbMaintainScriptsTable, allowOutOfSequenceExecutionOfPatches, qualifiers, patchQualifiers, includedQualifiers, excludedQualifiers, cleanDb, disableConstraints, updateSequences, useLastModificationDates, scriptFileExtensions, scriptParameterFile);
+        return new UpdateDatabaseTask(
+                getDbMaintainDatabases(), scriptLocations, scriptEncoding, postProcessingScriptDirectoryName,
+                fromScratchEnabled, autoCreateDbMaintainScriptsTable, allowOutOfSequenceExecutionOfPatches, qualifiers,
+                patchQualifiers, includedQualifiers, excludedQualifiers, cleanDb, disableConstraints,
+                updateSequences, useLastModificationDates, scriptFileExtensions, scriptParameterFile,
+                executedScriptsTableName);
     }
 
     /**
@@ -223,5 +229,9 @@ public class UpdateDatabaseAntTask extends BaseDatabaseAntTask {
      */
     public void setScriptParameterFile(String scriptParameterFile) {
         this.scriptParameterFile = scriptParameterFile;
+    }
+
+    public void setExecutedScriptsTableName(String executedScriptsTableName) {
+        this.executedScriptsTableName = executedScriptsTableName;
     }
 }

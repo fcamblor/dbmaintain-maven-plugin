@@ -46,12 +46,18 @@ public class UpdateDatabaseTask extends DbMaintainDatabaseTask {
     protected Boolean useLastModificationDates;
     protected String scriptFileExtensions;
     protected String scriptParameterFile;
+    protected String executedScriptsTableName;
 
 
     public UpdateDatabaseTask() {
     }
 
-    public UpdateDatabaseTask(List<DbMaintainDatabase> taskDatabases, String scriptLocations, String scriptEncoding, String postProcessingScriptDirectoryName, Boolean fromScratchEnabled, Boolean autoCreateDbMaintainScriptsTable, Boolean allowOutOfSequenceExecutionOfPatches, String qualifiers, String patchQualifiers, String includedQualifiers, String excludedQualifiers, Boolean cleanDb, Boolean disableConstraints, Boolean updateSequences, Boolean useLastModificationDates, String scriptFileExtensions, String scriptParameterFile) {
+    public UpdateDatabaseTask(List<DbMaintainDatabase> taskDatabases, String scriptLocations, String scriptEncoding,
+                String postProcessingScriptDirectoryName, Boolean fromScratchEnabled, Boolean autoCreateDbMaintainScriptsTable,
+                Boolean allowOutOfSequenceExecutionOfPatches, String qualifiers, String patchQualifiers,
+                String includedQualifiers, String excludedQualifiers, Boolean cleanDb,
+                Boolean disableConstraints, Boolean updateSequences, Boolean useLastModificationDates,
+                String scriptFileExtensions, String scriptParameterFile, String executedScriptsTableName) {
         super(taskDatabases);
         this.scriptLocations = scriptLocations;
         this.scriptEncoding = scriptEncoding;
@@ -69,6 +75,7 @@ public class UpdateDatabaseTask extends DbMaintainDatabaseTask {
         this.useLastModificationDates = useLastModificationDates;
         this.scriptFileExtensions = scriptFileExtensions;
         this.scriptParameterFile = scriptParameterFile;
+        this.executedScriptsTableName = executedScriptsTableName;
     }
 
 
@@ -91,6 +98,7 @@ public class UpdateDatabaseTask extends DbMaintainDatabaseTask {
         taskConfiguration.addConfigurationIfSet(PROPERTY_SCRIPT_FILE_EXTENSIONS, scriptFileExtensions);
         taskConfiguration.addConfigurationIfSet(PROPERTY_USESCRIPTFILELASTMODIFICATIONDATES, useLastModificationDates);
         taskConfiguration.addConfigurationIfSet(PROPERTY_SCRIPT_PARAMETER_FILE, scriptParameterFile);
+        taskConfiguration.addConfigurationIfSet(PROPERTY_EXECUTED_SCRIPTS_TABLE_NAME, executedScriptsTableName);
     }
 
     @Override
@@ -162,5 +170,9 @@ public class UpdateDatabaseTask extends DbMaintainDatabaseTask {
 
     public void setScriptParameterFile(String scriptParameterFile) {
         this.scriptParameterFile = scriptParameterFile;
+    }
+
+    public void setExecutedScriptsTableName(String executedScriptsTableName) {
+        this.executedScriptsTableName = executedScriptsTableName;
     }
 }

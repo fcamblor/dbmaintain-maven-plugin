@@ -83,6 +83,11 @@ public class UpdateDatabaseMojo extends BaseDatabaseMojo {
      */
     protected Boolean autoCreateDbMaintainScriptsTable;
     /**
+     * Name of the table that contains the database update script that have already been executed on the database.
+     * @parameter
+     */
+    protected String executedScriptsTableName;
+    /**
      * If this property is set to true, a patch script is allowed to be executed even if another script
      * with a higher index was already executed.
      *
@@ -169,7 +174,12 @@ public class UpdateDatabaseMojo extends BaseDatabaseMojo {
     @Override
     protected DbMaintainTask createDbMaintainTask(List<DbMaintainDatabase> dbMaintainDatabases) {
         String allScriptLocations = getAllScriptLocations(scriptLocations, scriptArchiveDependencies);
-        return new UpdateDatabaseTask(dbMaintainDatabases, allScriptLocations, scriptEncoding, postProcessingScriptDirectoryName, fromScratchEnabled, autoCreateDbMaintainScriptsTable, allowOutOfSequenceExecutionOfPatches, qualifiers, patchQualifiers, includedQualifiers, excludedQualifiers, cleanDb, disableConstraints, updateSequences, useLastModificationDates, scriptFileExtensions, scriptParameterFile);
+        return new UpdateDatabaseTask(
+                dbMaintainDatabases, allScriptLocations, scriptEncoding, postProcessingScriptDirectoryName,
+                fromScratchEnabled, autoCreateDbMaintainScriptsTable, allowOutOfSequenceExecutionOfPatches,
+                qualifiers, patchQualifiers, includedQualifiers, excludedQualifiers,
+                cleanDb, disableConstraints, updateSequences, useLastModificationDates,
+                scriptFileExtensions, scriptParameterFile, executedScriptsTableName);
     }
 
 }
