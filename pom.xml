@@ -44,13 +44,9 @@
         <url>http://jira.unitils.org/browse/DBM</url>
     </issueManagement>
     <scm>
-        <connection>
-            scm:svn:https://dbmaintain.svn.sourceforge.net/svnroot/dbmaintain/tags/releases/dbmaintain-parent-2.4
-        </connection>
-        <developerConnection>
-            scm:svn:https://dbmaintain.svn.sourceforge.net/svnroot/dbmaintain/tags/releases/dbmaintain-parent-2.4
-        </developerConnection>
-        <url>https://dbmaintain.svn.sourceforge.net/svnroot/dbmaintain/tags/releases/dbmaintain-parent-2.4</url>
+        <connection>scm:git:git://github.com/fcamblor/dbmaintain-maven-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:fcamblor/dbmaintain-maven-plugin.git</developerConnection>
+        <url>https://github.com/fcamblor/dbmaintain-maven-plugin</url>
     </scm>
     <mailingLists>
         <mailingList>
